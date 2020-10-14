@@ -1,1 +1,1 @@
- I can change the text in vim, save, and push to Git...hopefully
+ I can change the text in vim, save, and push to Git
