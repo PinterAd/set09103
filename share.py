@@ -1,8 +1,7 @@
 from flask import Flask
 from flask import render_template
-from flask import request
-import dbtest as dbHandler
 
+<<<<<<< HEAD
 app= Flask(__name__)
 @app.route('/login.html', methods=['POST', 'GET'])
 def login():
@@ -14,7 +13,11 @@ def login():
         return render_template('Noteshare.html',users=users)
     else:
         return render_template('Noteshare.html')
+=======
 
+>>>>>>> 93120fd89ffd3110d16fdb95191e28afd2bdbda8
+
+app= Flask(__name__)
 @app.route('/')
 def root():
     return render_template('Noteshare.html')
