@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+		<title>NoteShare</title>
+		<link rel="stylesheet" href="Noteshare.css">
+</head>
+<body>
+
+	<div class="topnav" id="myTopnav">
+	<div class="logo">
+	<img src="Noteshare_logo.png" style="max-height: 50px;">
+ 	</div>
+	
+	
+		
+		<a href="Noteshare.html" class="active">Home</a>
+		<div class="dropdown">
+			<button class="dropbtn">Community</button>
+		<div class="dropdown-content">
+		<a href="forum.html">Forum</a>
+		<a href="qa.html">Ask a question</a>
+		<a href="topics.html">Topics</a>
+		</div>
+		</div>
+		<a href="about.html">About</a>
+		<div class="login" id="myLogin">
+			<a href="login.html" class="login-btn">Login</a>
+			<p class="login-p"> or </p>
+			<a href="register.html" class="login-btn">Register</a>
+			</div>	
+			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+		
+		
+	</div>
+
+</body>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  var y = document.getElementById("myLogin");
+  
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+   if (y.className === "login") {
+    y.className += " responsive";
+  } else {
+    y.className = "login";
+  }
+  
+}
+</script>
+
+
+</html>
+		
