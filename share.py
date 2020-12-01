@@ -1,5 +1,21 @@
-from flask import Flask , render_template
+from flask import Flask
+from flask import render_template
+from flask import request
+import dbtest as dbHandler
+
 app= Flask(__name__)
+
+@app.route('/login.html', methods=['POST', 'GET'])
+def login():
+	if request.method=='POST':
+   		username = request.form['username']
+   		password = request.form['password']
+   		dbHandler.insertUser(username, password)
+   		users = dbHandler.retrieveUsers()
+		return render_template('Noteshare.html', users=users)
+   	else:
+   		return render_template('Noteshare.html')
+
 
 @app.route('/')
 def root():
