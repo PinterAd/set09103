@@ -4,13 +4,13 @@ from flask_bcrypt import Bcrypt
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Equalto, ValidationError
+from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY] = ''
-app.config['SQLALCHEMY_DATABASE_URI] = 'sqlite:///var/users.db'
-db = SWLAlchemy(app)
+app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/users.db'
+db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 class UserInfo(db.Model):
@@ -20,7 +20,7 @@ class UserInfo(db.Model):
 
 class RegistrationForm(FlaskForm):
     
-    username = StringField('Username' validators=[DataRequired(), Length(min-2, max-26)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=26)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Register')
     
@@ -31,12 +31,12 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username' validators=[DataRequired(), Length(min-2, max-26)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=26)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
 @app.route("/")
-def home():
+def root():
     return render_template('Noteshare.html')
     
 @app.route("/home")
@@ -63,7 +63,7 @@ def topics():
 def about():
     return render_template('about.html')
 
-@app.route("/register" , methods=['GET' , 'POST'])
+@app.route("/register.html" , methods=['GET' , 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -74,7 +74,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html' , form=form)
 
-@@app.route("/login" , methods=['GET' , 'POST'])
+@app.route("/login.html" , methods=['GET' , 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
