@@ -39,10 +39,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-@app.route("/") 
-def root():
-    return render_template('home.html')
-    
+@app.route("/")     
 @app.route("/home")
 def home():
     return render_template('home.html')
@@ -91,7 +88,7 @@ def login():
             return redirect(url_for('/home'))
         else:
          #   flash('Invalid password!')
-            return redirect(url_for('/home')) #even with this code the app is stuck at login 
+            return redirect(url_for('/home'))  
     return render_template('login.html' , form=form)
 
 if __name__ == "__main__":
