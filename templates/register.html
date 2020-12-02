@@ -4,48 +4,53 @@
 <head>
 	<meta charset="utf-8">
 		<title>Register</title>
-		<link rel="stylesheet" href="static/Noteshare.css">
+		<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 	<div class="topnav" id="myTopnav">
 	<div class="logo">
-	<img src="static/Noteshare_logo.png" style="max-height: 50px;">
+	<img src="logo.png" style="max-height: 50px;">
  	</div>
 	
 	
 		
-		<a href="Noteshare">Home</a>
+		<a href="home">Home</a>
+		<div class="dropdown">
+			<button class="dropbtn">Share</button>
+		<div class="dropdown-content">
+		<a href="notes">Notes</a>
+		<a href="upload">Upload</a>
+		</div>
+		</div>
 		<div class="dropdown">
 			<button class="dropbtn">Community</button>
 		<div class="dropdown-content">
 		<a href="forum">Forum</a>
 		<a href="qa">Ask a question</a>
-		<a href="topics">Topics</a>
 		</div>
 		</div>
-		<a href="about">About</a>
+		<a href="about" class="active">About</a>
 		<div class="login" id="myLogin">
 			<a href="login" class="login-btn">Login</a>
 			<p class="login-p"> or </p>
 			<a href="register" class="login-btn">Register</a>
 			</div>	
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-		
-		
 	</div>
 	
 	<div class="content">
 	
-	<h1>Register</h1>
+	<div class="formcont">
+			<h1 style="margin-left:40%">Register</h1>
   			<form action="/login" method="post">
-    			<input type="text" name="username" id="Username" placeholder="Username" required/>
+    			<input style="width:200px;" type="text" name="username" id="Username" placeholder="Username" required/>
     			<br>
-    			<input type="password" name="password" id="Password" placeholder="Password" required/>
+    			<input style="width:200px;" type="password" name="password" id="Password" placeholder="Password" required/>
     			<br>
-    			<input type="submit" class="button" value="Register"/>
+    			<input style="width:200px;" type="submit" class="button" value="Register"/>
   			</form>
-	
+	</div>
 	</div>
 	
 	
