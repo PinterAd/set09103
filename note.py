@@ -48,11 +48,11 @@ def home():
     return render_template('home.html')
     
 @app.route('/notes')
-def topics():
+def notes():
     return render_template('notes.html')
     
 @app.route('/upload')
-def forum():
+def upload():
     return render_template('upload.html')
     
 
@@ -87,11 +87,11 @@ def login():
         validate_pass = bcrypt.check_password_hash(username.password , form.password.data)
         
         if username and validate_pass:
-            flash('Login succesful!')
+         #   flash('Login succesful!')
             return redirect(url_for('/home'))
         else:
-            flash('Invalid password!')
-            return redirect(url_for('/home')) # Had to redirect home for demonstration
+         #   flash('Invalid password!')
+            return redirect(url_for('/home')) #even with this code the app is stuck at login 
     return render_template('login.html' , form=form)
 
 if __name__ == "__main__":
