@@ -2,13 +2,16 @@ from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
+#removed import bootstrap as it broke the app
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 import sqlite3
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT' 
+#meant to put it in a config file as workbook suggests, got lost in the database  
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/users.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -24,6 +27,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
     
+    # This doesn't come up as error when tested, probably because the database is empty
     def validate_username(self,username):
         check_user = UserInfo.query.filter_by(username=username.data).first()
         if check_user:
@@ -35,13 +39,21 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-@app.route("/")
+@app.route("/") 
 def root():
-    return render_template('Noteshare.html')
+    return render_template('home.html')
     
 @app.route("/home")
 def home():
-    return render_template('Noteshare.html')
+    return render_template('home.html')
+    
+@app.route('/notes')
+def topics():
+    return render_template('notes.html')
+    
+@app.route('/upload')
+def forum():
+    return render_template('upload.html')
     
 
 @app.route('/forum')
@@ -51,10 +63,6 @@ def forum():
 @app.route('/qa')
 def qa():
     return render_template('qa.html')
-
-@app.route('/topics')
-def topics():
-    return render_template('topics.html')
 
 @app.route('/about')
 def about():
@@ -83,7 +91,7 @@ def login():
             return redirect(url_for('/home'))
         else:
             flash('Invalid password!')
-            return redirect(url_for('/login'))
+            return redirect(url_for('/home')) # Had to redirect home for demonstration
     return render_template('login.html' , form=form)
 
 if __name__ == "__main__":
