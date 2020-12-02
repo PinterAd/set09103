@@ -4,36 +4,46 @@
 <head>
 	<meta charset="utf-8">
 		<title>About</title>
-		<link rel="stylesheet" href="static/Noteshare.css">
+		<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 	<div class="topnav" id="myTopnav">
 	<div class="logo">
-	<img src="static/Noteshare_logo.png" style="max-height: 50px;">
+	<img src="logo.png" style="max-height: 50px;">
  	</div>
 	
 	
 		
-		<a href="Noteshare.html">Home</a>
+		<a href="home">Home</a>
+		<div class="dropdown">
+			<button class="dropbtn">Share</button>
+		<div class="dropdown-content">
+		<a href="notes">Notes</a>
+		<a href="upload">Upload</a>
+		</div>
+		</div>
 		<div class="dropdown">
 			<button class="dropbtn">Community</button>
 		<div class="dropdown-content">
-		<a href="forum.html">Forum</a>
-		<a href="qa.html">Ask a question</a>
-		<a href="topics.html">Topics</a>
+		<a href="forum">Forum</a>
+		<a href="qa">Ask a question</a>
 		</div>
 		</div>
-		<a href="about.html" class="active">About</a>
+		<a href="about" class="active">About</a>
 		<div class="login" id="myLogin">
-			<a href="login.html" class="login-btn">Login</a>
+			<a href="login" class="login-btn">Login</a>
 			<p class="login-p"> or </p>
-			<a href="register.html" class="login-btn">Register</a>
+			<a href="register" class="login-btn">Register</a>
 			</div>	
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-		
-		
 	</div>
+	<div class="content">
+	<h1>About</h1>
+	<p>This web-app was made for a university project. 
+		It seemed fit to create a web service for students to
+		share their notes among each other.</p>
+	 </div>
 
 </body>
 <script>
