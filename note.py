@@ -43,27 +43,24 @@ def root():
 def home():
     return render_template('Noteshare.html')
     
-@app.route('/Noteshare.html')
-def noteshare():
-    return render_template('Noteshare.html')
 
-@app.route('/forum.html')
+@app.route('/forum')
 def forum():
     return render_template('forum.html')
 
-@app.route('/qa.html')
+@app.route('/qa')
 def qa():
     return render_template('qa.html')
 
-@app.route('/topics.html')
+@app.route('/topics')
 def topics():
     return render_template('topics.html')
 
-@app.route('/about.html')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route("/register.html" , methods=['GET' , 'POST'])
+@app.route("/register" , methods=['GET' , 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -71,10 +68,10 @@ def register():
         user_data = UserInfo(username=form.username.data , password=password_hash)
         db.session.add(user_data)
         db.session.commit()
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login'))
     return render_template('register.html' , form=form)
 
-@app.route("/login.html" , methods=['GET' , 'POST'])
+@app.route("/login" , methods=['GET' , 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -83,10 +80,10 @@ def login():
         
         if username and validate_pass:
             flash(f'Login succesful!')
-            return redirect(url_for('home'))
+            return redirect(url_for('home') , userName = username)
         else:
             flash(f'Invalid password!')
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
     return render_template('login.html' , form=form)
 
 if __name__ == "__main__":
