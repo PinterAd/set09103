@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+import sqlite3
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ class RegistrationForm(FlaskForm):
     
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=26)])
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Login')
     
     def validate_username(self,username):
         check_user = UserInfo.query.filter_by(username=username.data).first()
@@ -67,7 +68,7 @@ def register():
         user_data = UserInfo(username=form.username.data , password=password_hash)
         db.session.add(user_data)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('/login'))
     return render_template('register.html' , form=form)
 
 @app.route("/login" , methods=['GET' , 'POST'])
@@ -78,11 +79,11 @@ def login():
         validate_pass = bcrypt.check_password_hash(username.password , form.password.data)
         
         if username and validate_pass:
-            flash(f'Login succesful!')
-            return redirect(url_for('home'))
+            flash('Login succesful!')
+            return redirect(url_for('/home'))
         else:
-            flash(f'Invalid password!')
-            return redirect(url_for('login'))
+            flash('Invalid password!')
+            return redirect(url_for('/login'))
     return render_template('login.html' , form=form)
 
 if __name__ == "__main__":
