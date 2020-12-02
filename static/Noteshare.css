@@ -111,6 +111,13 @@ body
   display: block;
 }
 
+.content
+{
+    padding: 10em 1.25em;
+    background-color:#f2f2f2;
+	color: #333;
+}
+
 /* ------------------------------------------- */
 
 .topnav .icon {
