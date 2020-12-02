@@ -80,7 +80,7 @@ def login():
         
         if username and validate_pass:
             flash(f'Login succesful!')
-            return redirect(url_for('home') , userName = username)
+            return redirect(url_for('home'))
         else:
             flash(f'Invalid password!')
             return redirect(url_for('login'))
