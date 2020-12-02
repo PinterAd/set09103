@@ -71,7 +71,7 @@ def register():
         user_data = UserInfo(username=form.username.data , password=password_hash)
         db.session.add(user_data)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('login.html'))
     return render_template('register.html' , form=form)
 
 @app.route("/login.html" , methods=['GET' , 'POST'])
