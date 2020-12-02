@@ -13,4 +13,4 @@ def retrieveUsers():
 	cur.execute("SELECT username, password FROM user")
 	users = cur.fetchall()
 	con.close()
-	return users
+	return user
