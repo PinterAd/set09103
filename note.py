@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
@@ -12,7 +11,6 @@ app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/users.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-bootstrap = Bootstrap(app)
 
 class UserInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,7 +79,7 @@ def login():
         
         if username and validate_pass:
             flash(f'Login succesful!')
-            return redirect(url_for('home') , userName = username)
+            return redirect(url_for('home'))
         else:
             flash(f'Invalid password!')
             return redirect(url_for('login'))
