@@ -42,7 +42,7 @@ class LoginForm(FlaskForm):
 @app.route('/')     
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('NoteShare.html')
     
 @app.route('/notes')
 def notes():
@@ -71,6 +71,7 @@ def register():
     if form.validate_on_submit():
         password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user_data = UserInfo(username=form.username.data , password=password_hash)
+        #debug kiirat user data!!!!!
         db.session.add(user_data)
         db.session.commit()
         return redirect(url_for('/login'))
