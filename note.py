@@ -42,6 +42,7 @@ class LoginForm(FlaskForm):
 
 
 @app.route('/home')
+@login_required
 def home():
     return render_template('index.html')
 
@@ -57,8 +58,6 @@ def login():
                     login_user(user)
                     return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
-        return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
-
     return render_template('login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -76,7 +75,7 @@ def register():
 @app.route('/logout')
 @login_required
 def logout():
-    logout_user()
+    logout_user(current_user)
     session['logged_in'] = False
     return redirect(url_for('home'))
 
