@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -41,7 +42,7 @@ class LoginForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     filename = StringField('Filename', validators=[InputRequired(), Length(min=4, max=20)])
-    
+    file = FileField('Document', validators=[FileRequired()])
 
 
 
@@ -84,24 +85,13 @@ def logout():
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
-def account():
+def upload():
     form = UploadForm()
-    if request.method == 'POST':
+    
         f = request.files['datafile']
         f.save('static/uploads/file.pdf')
-        return "File Uploaded"
-    else:
-        page='''
-        <html>
-        <body>
-        <form action="" method="post" name="form" enctype="multipart/form-data">
-        <input type="file" name="datafile" />
-        <input type="submit" name="submit" id="submit"/>
-        </form>
-        </body>
-        </html>
-        '''
-        return page, 200
+        #return "File Uploaded"
+    
     return render_template('upload.html', form=form)
 
 
