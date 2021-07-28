@@ -39,6 +39,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
     remember = BooleanField('remember me')
 
+class UploadForm(FlaskForm):
+    filename = StringField('Filename', validators=[InputRequired(), Length(min=4, max=20)])
+    
+
 
 
 @app.route('/home')
@@ -81,7 +85,7 @@ def logout():
 @app.route('/upload')
 @login_required
 def upload():
-    form = LoginForm()
+    form = UploadForm()
     return render_template('upload.html', form=form)
 
 if __name__ == '__main__':
