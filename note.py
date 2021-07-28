@@ -63,5 +63,9 @@ def register():
         return '<h1> New user created</h1>'
     return render_template('register.html', form=form)
 
+@app.route('/upload')
+def upload():
+    return render_template('upload.html', form=form)
+
 if __name__ == '__main__':
     app.run(debug=True)
