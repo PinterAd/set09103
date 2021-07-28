@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
+from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -42,7 +44,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-                if user.password == form.password.data:
+                if bcrypt.check_password_hash(user.password , form.password.data):
                     return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
         return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
@@ -53,7 +55,8 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = User(username=form.username.data, password=form.password.data)
+        password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        new_user = User(username=form.username.data, password=password_hash)
         db.session.add(new_user)
         db.session.commit()
 
