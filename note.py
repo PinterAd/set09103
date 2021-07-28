@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, request, session
 #from flask.helpers import url_for
 #from werkzeug.utils import redirect
 from flask_bootstrap import Bootstrap
@@ -82,11 +82,29 @@ def logout():
     session['logged_in'] = False
     return redirect(url_for('home'))
 
-@app.route('/upload')
+@app.route('/upload', methods=['GET', 'POST'])
 @login_required
-def upload():
+def account():
     form = UploadForm()
+    if request.method == 'POST':
+        f = request.files['datafile']
+        f.save('static/uploads/file.pdf')
+        return "File Uploaded"
+    else:
+        page='''
+        <html>
+        <body>
+        <form action="" method="post" name="form" enctype="multipart/form-data">
+        <input type="file" name="datafile" />
+        <input type="submit" name="submit" id="submit"/>
+        </form>
+        </body>
+        </html>
+        '''
+        return page, 200
     return render_template('upload.html', form=form)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
