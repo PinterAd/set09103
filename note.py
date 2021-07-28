@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, session
 #from flask.helpers import url_for
 #from werkzeug.utils import redirect
 from flask_bootstrap import Bootstrap
@@ -45,6 +45,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
                 if bcrypt.check_password_hash(user.password , form.password.data):
+                    session['logged_in'] = True
                     return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
         return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
