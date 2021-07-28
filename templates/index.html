@@ -32,8 +32,12 @@ Noteshare
               <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
           </div>
           <div class="navbar-nav ml-auto">
+            {% if session['logged_in'] == True %}
               <a href="login" class="nav-item nav-link">Login</a>
               <a href="register" class="nav-item nav-link">Register</a>
+            {% else %}
+            <a href="home" class="nav-item nav-link">Logout</a>
+            {% endif %}
           </div>
       </div>
   </nav>
