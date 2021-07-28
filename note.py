@@ -81,7 +81,8 @@ def logout():
 @app.route('/upload')
 @login_required
 def upload():
-    return render_template('upload.html')
+    form = LoginForm()
+    return render_template('upload.html', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
