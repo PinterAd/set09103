@@ -41,10 +41,10 @@ def login():
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-            if user:
+        if user:
                 if user.password == form.password.data:
                     return redirect(url_for('/'))
-            return '<h1> Invalid</h1>'
+        return '<h1> Invalid</h1>'
         return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     return render_template('login.html', form=form)
