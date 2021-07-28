@@ -53,7 +53,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
                 if bcrypt.check_password_hash(user.password , form.password.data):
-                    #session['logged_in'] = True
+                    session['logged_in'] = True
                     login_user(user)
                     return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
@@ -77,6 +77,7 @@ def register():
 @login_required
 def logout():
     logout_user()
+    session['logged_in'] = False
     return redirect(url_for('home'))
 
 @app.route('/upload')
