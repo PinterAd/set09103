@@ -31,7 +31,7 @@ class LoginForm(FlaskForm):
 
 
 
-@app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
 
@@ -43,7 +43,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
                 if user.password == form.password.data:
-                    return redirect(url_for('/'))
+                    return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
         return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
