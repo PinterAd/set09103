@@ -42,11 +42,10 @@ Noteshare
 {% endblock %}
 
 {% block content %}
-<form action="/login" method="POST">
+<form action="/upload" method="POST">
 {{ form.hidden_tag() }}
-{{ wtf.form_field(form.username) }}
-{{ wtf.form_field(form.password) }}
-{{ wtf.form_field(form.remember) }}
+{{ wtf.form_field(form.filename) }}
+
 <input style="width:200px;" type="submit" class="button" value="Log In"/>
 </form>
 {% endblock %}
