@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
+#from flask.helpers import url_for
+#from werkzeug.utils import redirect
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -38,6 +40,11 @@ def login():
     form = LoginForm()
     
     if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+            if user:
+                if user.password == form.password.data:
+                    return redirect(url_for('/'))
+            return '<h1> Invalid</h1>'
         return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     return render_template('login.html', form=form)
