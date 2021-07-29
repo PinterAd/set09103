@@ -86,13 +86,9 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
-    form = UploadForm()
+   
     
-        f = request.files['datafile']
-        f.save('static/uploads/file.pdf')
-        #return "File Uploaded"
-    
-    return render_template('upload.html', form=form)
+    return render_template('upload.html')
 
 
 
