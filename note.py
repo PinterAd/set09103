@@ -1,14 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-#from flask.helpers import url_for
-#from werkzeug.utils import redirect
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
-#from flask_wtf.file import FileField, FileRequired, FileAllowed
-#from flask_wtf.csrf import CSRFProtect
-#import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -23,14 +18,17 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-#csrf = CSRFProtect()
-#app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024  # 4MB max-limit.
-#csrf.init_app(app)
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
     password = db.Column(db.String(80))
+    files = db.relationship('File', backref='uploader')
+
+class File(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(20))
+    uploader_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -48,8 +46,6 @@ class LoginForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     filename = StringField('Filename', validators=[InputRequired()])
-    #document = FileField('Document', validators=[FileRequired(), FileAllowed(['xls', 'xlsx'], 'Excel Document only!')])
-
 
 @app.route('/home')
 def home():
@@ -94,9 +90,9 @@ def upload():
     form = UploadForm()
     if form.validate_on_submit():
         #if request.method == 'POST':
-            #filename = form.filename.data
+            filename = form.filename.data
             f = request.files['datafile']
-            f.save('static/uploads/new.pdf')
+            f.save('static/uploads/' + filename + '.pdf')
             
             flash('Document uploaded successfully.')
     return render_template('upload.html', form=form)
