@@ -50,6 +50,9 @@ Noteshare
   {% for file in files %}
   <li>{{ file.filename }}</li>
   {% endfor %}
+  {% for file in files %}
+  <li><embed src="'+url_for('static', filename='uploads/' + file.filename + '.pdf')+'" type="application/pdf" width="100%" height="10%" /></li>
+  {% endfor %}
 </ul>
 
 {% endblock %}
