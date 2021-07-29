@@ -7,6 +7,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_wtf.file import FileField, FileRequired, FileAllowed
+import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -77,14 +78,14 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/logout')
-@login_required
+#@login_required
 def logout():
     logout_user()
     session['logged_in'] = False
     return redirect(url_for('home'))
 
 @app.route('/upload', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def upload():
    
     
