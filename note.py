@@ -94,9 +94,9 @@ def upload():
     form = UploadForm()
     if form.validate_on_submit():
         if request.method == 'POST':
-            filename = form.filename.data
+            #filename = form.filename.data
             f = request.files['datafile']
-            f.save('static/uploads/' + filename + '.pdf')
+            f.save('static/uploads/new.pdf')
             
             flash('Document uploaded successfully.')
     return render_template('upload.html', form=form)
