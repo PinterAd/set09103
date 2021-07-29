@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, url_for, request, session, flash
 #from flask.helpers import url_for
 #from werkzeug.utils import redirect
 from flask_bootstrap import Bootstrap
@@ -7,6 +7,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_wtf.file import FileField, FileRequired, FileAllowed
+from flask_wtf.csrf import CSRFProtect
 import os
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -21,6 +22,10 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024  # 4MB max-limit.
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -42,9 +47,8 @@ class LoginForm(FlaskForm):
     remember = BooleanField('remember me')
 
 class UploadForm(FlaskForm):
-    filename = StringField('Filename', validators=[InputRequired(), Length(min=4, max=20)])
-    file = FileField('Document', validators=[FileRequired()])
-
+    filename = StringField('First Name', validators=[InputRequired()])
+    document = FileField('Document', validators=[FileRequired(), FileAllowed(['xls', 'xlsx'], 'Excel Document only!')])
 
 
 @app.route('/home')
@@ -87,9 +91,24 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 #@login_required
 def upload():
+    
+    form = UploadForm()
+    if form.validate_on_submit():
+        uploads_dir = os.path.join(
+            os.path.dirname(app.instance_path), 'static/uploads'
+        )
+
+        d = form.document.data        
+        filename = form.file_name.data
+        #docname = secure_filename(d.filename)
+
    
     
-    return render_template('upload.html')
+    d.save( os.path.join(uploads_dir, filename))
+
+    flash('Document uploaded successfully.')
+    
+    return render_template('upload.html', form=form)
 
 
 
