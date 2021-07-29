@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(80))
     files = db.relationship('File', backref='uploader')
 
-class File(db.Model):
+class File(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(20))
     uploader_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -89,10 +89,14 @@ def logout():
 def upload():
     form = UploadForm()
     if form.validate_on_submit():
-        #if request.method == 'POST':
+        
             filename = form.filename.data
             f = request.files['datafile']
             f.save('static/uploads/' + filename + '.pdf')
+
+            new_file = File(filename=form.filename.data, uploader=current_user)
+            db.session.add(new_file)
+            db.session.commit()
             
             flash('Document uploaded successfully.')
     return render_template('upload.html', form=form)
