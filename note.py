@@ -93,12 +93,12 @@ def logout():
 def upload():
     form = UploadForm()
     if form.validate_on_submit():
-        filename = form.filename.data
-        f = request.files['datafile']
-        f.save('static/uploads/' + filename + '.pdf')
-        
-    flash('Document uploaded successfully.')
-    
+        if request.method == 'POST':
+            filename = form.filename.data
+            f = request.files['datafile']
+            f.save('static/uploads/' + filename + '.pdf')
+            
+            flash('Document uploaded successfully.')
     return render_template('upload.html', form=form)
 
 
