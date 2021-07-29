@@ -50,7 +50,7 @@ class UploadForm(FlaskForm):
 @app.route('/home')
 def home():
     files = File.query.all()
-    return render_template('index.html', files=files)
+    return render_template('index.html', files=files, name=current_user.username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
