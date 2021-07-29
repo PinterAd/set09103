@@ -45,6 +45,13 @@ Noteshare
 {% endblock %}
 
 {% block content %}
+
+<ul>
+  {% for file in files %}
+  <li>{{ file.filename }}</li>
+  {% endfor %}
+</ul>
+
 {% endblock %}
 
 {% block scripts %}
