@@ -98,13 +98,13 @@ def upload():
             os.path.dirname(app.instance_path), 'static/uploads'
         )
 
-        d = form.document.data        
+        #d = form.document.data        
         filename = form.file_name.data
         #docname = secure_filename(d.filename)
 
    
     
-    d.save( os.path.join(uploads_dir, filename))
+    form.document.data.save( os.path.join(uploads_dir, filename))
 
     flash('Document uploaded successfully.')
     
