@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user, login_required, logout_user, current_user
 
 
 app = Flask(__name__)
@@ -28,6 +28,12 @@ class File(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(20))
     uploader_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class Anonymous(AnonymousUserMixin):
+  def __init__(self):
+    self.username = 'Guest'
+
+login_manager.anonymous_user = Anonymous
 
 
 @login_manager.user_loader
