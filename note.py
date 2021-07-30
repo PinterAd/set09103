@@ -1,3 +1,4 @@
+# import libraries 
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -119,4 +120,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
