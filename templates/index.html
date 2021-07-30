@@ -17,7 +17,7 @@ Noteshare
 {% block navbar %}
 <div class="bs-example" style="font-size:24px">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a href="#" class="navbar-brand" style="margin-top: 15px;">
+      <a href="#" class="navbar-brand" style="margin-top: 20px;">
           <img src="/static/logo.png" height="28" alt="Noteshare">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -26,14 +26,10 @@ Noteshare
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
-              <a href="home" class="nav-item nav-link active">Home</a>
-              <a href="upload" class="nav-item nav-link">Upload</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-              <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+            <a href="home" class="nav-item nav-link active">Home</a>
+            <a href="upload" class="nav-item nav-link">Upload</a>
+            <a href="#" class="nav-item nav-link disabled" tabindex="-1">Community</a>
+            <a href="#" class="nav-item nav-link">About</a>
           </div>
           <div class="navbar-nav ml-auto">
             {% if session['logged_in'] == False %}
