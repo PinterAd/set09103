@@ -18,6 +18,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+# tables for database (relational so it is stored which user uploaded what files)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
@@ -29,10 +30,10 @@ class File(UserMixin, db.Model):
     filename = db.Column(db.String(20))
     uploader_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+# def guest user for name passing without login 
 class Anonymous(AnonymousUserMixin):
   def __init__(self):
     self.username = 'Guest'
-
 login_manager.anonymous_user = Anonymous
 
 
@@ -40,6 +41,7 @@ login_manager.anonymous_user = Anonymous
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# form classes 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=20)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
@@ -55,13 +57,29 @@ class UploadForm(FlaskForm):
 
 @app.route('/home')
 def home():
+    # passing the files to frontend
     files = File.query.all()
     return render_template('index.html', files=files, name=current_user.username)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    
+    # store user/hashed pass in database
+    if form.validate_on_submit():
+        password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        new_user = User(username=form.username.data, password=password_hash)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return '<h1> New user created</h1>'
+    return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     
+    # validate login data against database
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
@@ -71,18 +89,6 @@ def login():
                     return redirect(url_for('home'))
         return '<h1> Invalid</h1>'
     return render_template('login.html', form=form)
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = User(username=form.username.data, password=password_hash)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return '<h1> New user created</h1>'
-    return render_template('register.html', form=form)
 
 @app.route('/logout')
 #@login_required
