@@ -104,6 +104,8 @@ def upload():
             new_file = File(filename=form.filename.data, uploader=current_user)
             db.session.add(new_file)
             db.session.commit()
+
+            form.filename.data = ''
             
             flash('Document uploaded successfully.')
     return render_template('upload.html', form=form)
