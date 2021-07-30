@@ -64,7 +64,7 @@ Noteshare
       {% endfor %}
       {% else %}
       {% for file in files %}
-      <li>{{ file.filename }}</li>
+      <li><i class="fa fa-file" aria-hidden="true"></i> {{ file.filename}}.pdf</li>
       {% endfor %}
       {% endif %}
     </ul>
