@@ -94,14 +94,14 @@ def login():
     return render_template('login.html', form=form)
 
 @app.route('/logout')
-#@login_required
+@login_required
 def logout():
     logout_user()
     session['logged_in'] = False
     return redirect(url_for('home'))
 
 @app.route('/upload', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def upload():
     form = UploadForm()
     if form.validate_on_submit():
