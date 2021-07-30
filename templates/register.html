@@ -47,12 +47,18 @@ Noteshare
 {% endblock %}
 
 {% block content %}
-<form action="/register" method="POST">
-{{ form.hidden_tag() }}
-{{ wtf.form_field(form.username) }}
-{{ wtf.form_field(form.password) }}
-<input style="width:200px;" type="submit" class="button" value="Log In"/>
-</form>
+<div class="container-fluid bg-light">
+<div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 450pt; margin-top: 150pt;">
+    <form action="/register" method="POST">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username)}}
+        {{ wtf.form_field(form.password) }}
+        <div style="text-align: center;">
+            <input style="width:200px; font-size: 18pt; margin-top: 20px;" type="submit" class="btn btn-lg btn-success" value="Log In"/>
+        </div>
+    </form>
+</div>
+</div>
 {% endblock %}
 
 {% block scripts %}
