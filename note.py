@@ -117,7 +117,7 @@ def upload():
             form.filename.data = ''
             
             flash('Document uploaded successfully.')
-    return render_template('upload.html', form=form)
+    return render_template('upload.html', form=form, name=current_user.username)
 
 
 
