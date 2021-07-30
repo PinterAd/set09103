@@ -19,7 +19,7 @@ def init ( app ) :
         app.config['ip_address'] = config.get('config', 'ip_address')
         app.config['port'] = config.get('config', 'port')
         app.config['url'] = config.get('config ', 'url')
-        app.config['SECRET_KEY'] = config.get('config', 'secretkey')
+        app.config['SECRET_KEY'] = config.get('config', 'SECRET_KEY')
     except:print(" Could not read configs from : ", config_location )
 
 app = Flask(__name__)
