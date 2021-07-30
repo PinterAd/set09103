@@ -2,7 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Noteshare
+Login
 {% endblock %}
 
 {% block styles %}
@@ -33,9 +33,13 @@ Noteshare
               <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
           </div>
           <div class="navbar-nav ml-auto">
-              <a href="login" class="nav-item nav-link btn-warning" style="color:dimgray;">Login</a>
-              
-              <a href="register" class="nav-item nav-link btn-warning" style="color:dimgray; margin-left:20px;">Register</a>
+            {% if session['logged_in'] == False %}
+            <a href="login" class="nav-item nav-link btn-warning" style="color:dimgray;">Login</a>
+            <a href="register" class="nav-item nav-link btn-warning" style="color:dimgray; margin-left:20px;">Register</a>
+            {% else %}
+            <h1>{{name}}'s uploads</h1>
+            <a href="logout" class="nav-item nav-link">Logout</a>
+            {% endif %}
           </div>
       </div>
   </nav>
@@ -51,7 +55,7 @@ Noteshare
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.remember) }}
         <div style="text-align: center;">
-            <input style="width:200px; font-size: 18pt" type="submit" class="btn btn-lg btn-success" value="Log In"/>
+            <input style="width:200px; font-size: 18pt; margin-top: 20px;" type="submit" class="btn btn-lg btn-success" value="Log In"/>
         </div>
     </form>
 </div>
