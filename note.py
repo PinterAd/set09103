@@ -76,7 +76,7 @@ def register():
             flash('User created')
     except:
         flash('User already exists')
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, name=current_user.username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -91,7 +91,7 @@ def login():
                     login_user(user)
                     return redirect(url_for('home'))
         flash('Invalid username or password.')
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, name=current_user.username)
 
 @app.route('/logout')
 @login_required
