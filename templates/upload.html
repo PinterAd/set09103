@@ -44,8 +44,14 @@ Noteshare
 {% block content %}
 <form action="/upload" enctype="multipart/form-data" method="POST">
 {{ form.hidden_tag() }}
+<div class="row">
+    <div class="col">
 {{ wtf.form_field(form.filename) }}
+</div>
+<div class="col">
 <input type="file" name="datafile" />
+</div>
+</div>
 <input style="width:200px;" type="submit" name="submit" class="button" value="Upload"/>
 </form>
 {% endblock %}
