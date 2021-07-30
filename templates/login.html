@@ -46,7 +46,7 @@ Noteshare
 <div class="container bg-light" style="font-size: 14pt; max-width: 500pt; margin-top: 200pt;">
     <form action="/login" method="POST">
         {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.username style"height=20px") }}
+        {{ wtf.form_field(style"height=20px")(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.remember) }}
         <input style="width:200px;" type="submit" class="button" value="Log In"/>
