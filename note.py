@@ -67,15 +67,15 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    
-    # store user/hashed pass in database
-    if form.validate_on_submit():
-        password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = User(username=form.username.data, password=password_hash)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return '<h1> New user created</h1>'
+    try:
+        if form.validate_on_submit():
+            password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            new_user = User(username=form.username.data, password=password_hash)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('User created')
+    except:
+        flash('User already exists')
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
