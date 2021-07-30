@@ -48,13 +48,13 @@ Noteshare
 {% block content %}
 
 <div class="container-fluid bg-light">
-  <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 800pt; margin-top: 50pt;">
+  <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 600pt; margin-top: 50pt;">
 <div class="row">
   <div class="column">
-    <ul>
+    <ul style="color: bg-dark; text-decoration: none;">
       {% if session['logged_in'] == True %}
       {% for file in files %}
-      <li style="color: bg-dark; text-decoration: none;">
+      <li>
         <a href="static/uploads/{{ file.filename }}.pdf" target="_blank">{{ file.filename}}.pdf</a>
       </li>
       {% endfor %}
