@@ -19,7 +19,7 @@ Noteshare
 <div class="bs-example" style="font-size:24px">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a href="#" class="navbar-brand">
-          <img src="/static/logo.png" height="24" alt="Noteshare">
+          <img src="/static/logo.png" height="28" alt="Noteshare">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@ Noteshare
               <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
           </div>
           <div class="navbar-nav ml-auto">
-              <a href="login" class="nav-item nav-link">Login</a>
+              <a href="login" class="nav-item nav-link btn-warning">Login</a>
               <a href="register" class="nav-item nav-link">Register</a>
           </div>
       </div>
@@ -42,7 +42,7 @@ Noteshare
 {% endblock %}
 
 {% block content %}
-<div class="container" style="font-size: 24pt; max-width: 500pt; margin-top: 20pt;">
+<div class="container bg-dark" style="font-size: 18pt; max-width: 500pt; margin-top: 200pt;">
     <form action="/login" method="POST">
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username) }}
