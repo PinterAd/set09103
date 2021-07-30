@@ -90,7 +90,7 @@ def login():
                     session['logged_in'] = True
                     login_user(user)
                     return redirect(url_for('home'))
-        return '<h1> Invalid</h1>'
+        flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
 @app.route('/logout')
