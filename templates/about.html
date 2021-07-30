@@ -28,10 +28,10 @@ About
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
-            <a href="home" class="nav-item nav-link active">Home</a>
+            <a href="home" class="nav-item nav-link">Home</a>
             <a href="upload" class="nav-item nav-link">Upload</a>
             <a href="#" class="nav-item nav-link disabled" tabindex="-1">Community</a>
-            <a href="#" class="nav-item nav-link">About</a>
+            <a href="#" class="nav-item nav-link active">About</a>
           </div>
           <div class="navbar-nav ml-auto">
             {% if session['logged_in'] == False %}
@@ -51,12 +51,14 @@ About
 {% block content %}
 
 <div class="container-fluid bg-light">
-  <h1>NoteShare</h1>
-  <p>Noteshare is a social media app created for students.</p>
-  <p>Students can upload and share their school notes,</p>
-  <p>additional study materials. In the community section</p>
-  <p>they will be able to request specific notes, or have </p>
-  <p>discussion about their studies</p>
+	<div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 600pt; margin-top: 50pt;">
+	<h1>NoteShare</h1>
+	<p>Noteshare is a social media app created for students.</p>
+	<p>Students can upload and share their school notes,</p>
+	<p>additional study materials. In the community section</p>
+	<p>they will be able to request specific notes, or have </p>
+	<p>discussion about their studies</p>
+	</div>
 </div>
 {% endblock %}
 
