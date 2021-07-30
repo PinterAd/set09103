@@ -1,6 +1,6 @@
 # import libraries 
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-import ConfigParser
+import configparser
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -11,7 +11,7 @@ from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user,
 
 
 def init ( app ) :
-    config = ConfigParser . ConfigParser ()
+    config = configparser.configparser()
     try:
         config_location = "etc/ defaults .cfg"
         config . read ( config_location )
