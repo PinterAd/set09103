@@ -44,13 +44,13 @@ Noteshare
 
 {% block content %}
 <div class="container-fluid bg-light">
-<div class="container bg-dark text-light form-group form-group-lg" style="font-size: 18pt; max-width: 450pt; margin-top: 150pt;">
+<div class="container .bg-secondary text-light form-group form-group-lg" style="font-size: 18pt; max-width: 450pt; margin-top: 150pt;">
     <form action="/login" method="POST">
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username)}}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.remember) }}
-        <input style="width:200px;" type="submit" class="button" value="Log In"/>
+        <input style="width:200px;" type="submit" class="btn btn-success" value="Log In"/>
     </form>
 </div>
 </div>
