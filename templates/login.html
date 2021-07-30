@@ -42,7 +42,7 @@ Noteshare
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="font-size: 24; max-width: 50pt;">
     <form action="/login" method="POST">
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username) }}
