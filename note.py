@@ -11,10 +11,19 @@ from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user,
 
 app = Flask(__name__)
 
+@app . route ('/ config /')
+def config () :
+    s = []
+    s . append ('debug :'+ app . config ['DEBUG '])
+    s . append ('port :'+ app . config ['port '])
+    s . append ('url:'+ app . config ['url '])
+    s . append ('ip_address :'+ app . config ['ip_address'])
+    return ','. join ( s )
+
 def init ( app ) :
     config = ConfigParser.ConfigParser()
     try:
-        config_location ='///etc/defaults.cfg'
+        config_location ='/etc/defaults.cfg'
         config.read( config_location )
         app.config['DEBUG'] = config.get('config', 'debug')
         app.config['ip_address'] = config.get('config', 'ip_address')
