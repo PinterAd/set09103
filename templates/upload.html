@@ -49,19 +49,16 @@ Noteshare
 {% block content %}
 <div class="container-fluid bg-light">
     <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 450pt; margin-top: 150pt;">
-<form action="/upload" enctype="multipart/form-data" method="POST">
-{{ form.hidden_tag() }}
-<div class="row">
-    <div class="col">
-{{ wtf.form_field(form.filename) }}
+        <form action="/upload" enctype="multipart/form-data" method="POST">
+            {{ form.hidden_tag() }}
+            {{ wtf.form_field(form.filename) }}
+            <input type="file" name="datafile" />
+            <div style="text-align: center;">
+                <input style="width:200px; font-size: 18pt; margin-top: 20px;" type="submit" name="submit" class="btn btn-lg btn-success" value="Upload"/>
+            </div>
+        </form>
+    </div>
 </div>
-<div class="col">
-<input type="file" name="datafile" />
-</div>
-<div style="text-align: center;">
-    <input style="width:200px; font-size: 18pt; margin-top: 20px;" type="submit" name="submit" class="btn btn-lg btn-success" value="Upload"/>
-</div>
-</form>
 {% endblock %}
 
 {% block scripts %}
