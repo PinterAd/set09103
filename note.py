@@ -1,5 +1,6 @@
 # import libraries 
 from flask import Flask, render_template, redirect, url_for, request, session, flash
+import ConfigParser
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -8,6 +9,17 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user, login_required, logout_user, current_user
 
+
+def init ( app ) :
+    config = ConfigParser . ConfigParser ()
+    try:
+        config_location = "etc/ defaults .cfg"
+        config . read ( config_location )
+        app . config ['DEBUG'] = config . get (" config ", " debug ")
+        app . config ['ip_address'] = config . get (" config ", " ip_address")
+        app . config ['port'] = config . get (" config ", " port ")
+        app . config ['url'] = config . get (" config ", "url")
+    except :print (" Could not read configs from : ", config_location )
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -120,4 +132,7 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    init ( app )
+    app . run (
+        host = app . config ['ip_address'] ,
+        port =int ( app . config ['port']) )
