@@ -119,6 +119,10 @@ def upload():
             flash('Document uploaded successfully.')
     return render_template('upload.html', form=form, name=current_user.username)
 
+@app.route('/about')
+def about():
+    return render_template('about.html', name=current_user.username)
+
 
 
 if __name__ == '__main__':
