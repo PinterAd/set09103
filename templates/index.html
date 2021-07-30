@@ -54,11 +54,12 @@ Noteshare
   <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 600pt; margin-top: 50pt;">
 <div class="row">
   <div class="column">
-    <ul>
+    <ul style="list-style-type: none;">
       {% if session['logged_in'] == True %}
       {% for file in files %}
       <li>
-        <a class="text-reset" style="color: bg-dark;" href="static/uploads/{{ file.filename }}.pdf" target="_blank">{{ file.filename}}.pdf</a>
+        <a class="text-reset" style="color: bg-dark;" href="static/uploads/{{ file.filename }}.pdf" target="_blank">
+          <i class="fa fa-file" aria-hidden="true"></i>{{ file.filename}}.pdf</a>
       </li>
       {% endfor %}
       {% else %}
