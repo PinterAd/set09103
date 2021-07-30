@@ -1,6 +1,6 @@
 # import libraries 
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-import configparser
+from configparser import ConfigParser
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -12,7 +12,7 @@ from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user,
 app = Flask(__name__)
 
 def init ( app ) :
-    config = configparser.configparser()
+    config = ConfigParser.ConfigParser()
     try:
         config_location ='etc/defaults.cfg'
         config.read( config_location )
@@ -23,7 +23,7 @@ def init ( app ) :
         app.config['SECRET_KEY'] = config.get('config', 'secretkey')
     except:print(" Could not read configs from : ", config_location )
 
-#app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
 db = SQLAlchemy(app)
