@@ -18,7 +18,7 @@ Upload
 {% block navbar %}
 <div class="bs-example" style="font-size:24px">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a href="#" class="navbar-brand" style="margin-top: 15px;">
+      <a href="#" class="navbar-brand" style="margin-top: 20px;">
           <img src="/static/logo.png" height="28" alt="Noteshare">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -37,7 +37,8 @@ Upload
             <a href="login" class="nav-item nav-link btn-warning" style="color:dimgray;">Login</a>
             <a href="register" class="nav-item nav-link btn-warning" style="color:dimgray; margin-left:20px;">Register</a>
             {% else %}
-            <h1>{{name}}'s uploads</h1>
+            <a href="home" class="nav-item nav-link active">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{name}}</a>
             <a href="logout" class="nav-item nav-link">Logout</a>
             {% endif %}
           </div>
