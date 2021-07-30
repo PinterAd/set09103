@@ -54,7 +54,7 @@ Noteshare
     <ul>
       {% if session['logged_in'] == True %}
       {% for file in files %}
-      <li><a href="static/uploads/{{ file.filename }}.pdf" target="_blank">{{ file.filename}}</a></li>
+      <li><a href="static/uploads/{{ file.filename }}.pdf" target="_blank" style="color: bg-dark;">{{ file.filename}}</a></li>
       {% endfor %}
       {% else %}
       {% for file in files %}
