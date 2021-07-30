@@ -52,8 +52,8 @@ Noteshare
 
 <div class="container-fluid bg-light">
   <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 600pt; margin-top: 50pt;">
-<div class="row">
-  <div class="column">
+
+  <div>
     <ul style="list-style-type: none;">
       {% if session['logged_in'] == True %}
       {% for file in files %}
@@ -69,14 +69,6 @@ Noteshare
       {% endif %}
     </ul>
   </div>
-  <div class="column">
-    <ul style="list-style-type: none;">
-      {% for file in files %}
-      <li>{{ file.filename }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
 </div>
 </div>
 {% endblock %}
