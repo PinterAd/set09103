@@ -17,8 +17,8 @@ Noteshare
 {% block navbar %}
 <div class="bs-example" style="font-size:24px">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">
-          <img src="/static/logo.png" height="24" alt="Noteshare">
+      <a href="#" class="navbar-brand" style="margin-top: 15px;">
+          <img src="/static/logo.png" height="28" alt="Noteshare">
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
@@ -33,9 +33,10 @@ Noteshare
           </div>
           <div class="navbar-nav ml-auto">
             {% if session['logged_in'] == False %}
-              <a href="login" class="nav-item nav-link btn btn-warning">Login</a>
-              <a href="register" class="nav-item nav-link">Register</a>
+            <a href="login" class="nav-item nav-link btn-warning" style="color:dimgray;">Login</a>
+            <a href="register" class="nav-item nav-link btn-warning" style="color:dimgray; margin-left:20px;">Register</a>
             {% else %}
+            <h1>{{name}}'s uploads</h1>
             <a href="logout" class="nav-item nav-link">Logout</a>
             {% endif %}
           </div>
@@ -46,18 +47,20 @@ Noteshare
 
 {% block content %}
 
-<!--{% if session['logged_in'] == True %}-->
-<h1>Hello {{name}}</h1>
-<!--{% endif %}-->
-
+{% if session['logged_in'] == True %}
 <ul>
-  {% for file in files %}
-  <li>{{ file.filename }}</li>
-  {% endfor %}
   {% for file in files %}
   <li><a href="static/uploads/{{ file.filename }}.pdf" target="_blank">{{ file.filename}}</a></li>
   {% endfor %}
 </ul>
+
+{% else %}
+<ul>
+  {% for file in files %}
+  <li>{{ file.filename }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock %}
 
