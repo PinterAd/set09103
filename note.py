@@ -9,6 +9,7 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user, login_required, logout_user, current_user
 
+app = Flask(__name__)
 
 def init ( app ) :
     config = configparser.configparser()
@@ -22,7 +23,6 @@ def init ( app ) :
         app.config['SECRET_KEY'] = config.get('config', 'SECRET_KEY')
     except:print(" Could not read configs from : ", config_location )
 
-app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
