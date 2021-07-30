@@ -20,7 +20,7 @@ def init ( app ) :
         app.config['ip_address'] = config.get('config', 'ip_address')
         app.config['port'] = config.get('config', 'port')
         app.config['url'] = config.get('config ', 'url')
-        app.config['SECRET_KEY'] = config.get('config', 'SECRET_KEY')
+        app.config['SECRET_KEY'] = config.get('config', 'secretkey')
     except:print(" Could not read configs from : ", config_location )
 
 #app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -133,7 +133,7 @@ def upload():
 
 
 if __name__ == '__main__':
-    init ( app )
-    app . run (
+    init(app)
+    app.run(
         host = app . config ['ip_address'] ,
         port =int ( app . config ['port']) )
