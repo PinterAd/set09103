@@ -47,20 +47,29 @@ Noteshare
 
 {% block content %}
 
-{% if session['logged_in'] == True %}
+
 <ul>
+  {% if session['logged_in'] == True %}
+  
   {% for file in files %}
   <li><a href="static/uploads/{{ file.filename }}.pdf" target="_blank">{{ file.filename}}</a></li>
   {% endfor %}
+  
+  {% else %}
+  
+  {% for file in files %}
+  <li>{{ file.filename }}</li>
+  {% endfor %}
+  
+  {% endif %
 </ul>
 
-{% else %}
 <ul>
   {% for file in files %}
   <li>{{ file.filename }}</li>
   {% endfor %}
 </ul>
-{% endif %}
+
 
 {% endblock %}
 
