@@ -47,6 +47,8 @@ Noteshare
 
 {% block content %}
 
+<div class="container-fluid bg-light">
+  <div class="container .bg-secondary text-muted form-group form-group-lg" style="font-size: 18pt; max-width: 450pt; margin-top: 150pt;">
 <div class="row">
   <div class="column">
     <ul>
@@ -62,15 +64,15 @@ Noteshare
     </ul>
   </div>
   <div class="column">
-    <ul>
+    <ul style="list-style-type: none;">
       {% for file in files %}
       <li>{{ file.filename }}</li>
       {% endfor %}
     </ul>
   </div>
 </div>
-
-
+</div>
+</div>
 {% endblock %}
 
 {% block scripts %}
