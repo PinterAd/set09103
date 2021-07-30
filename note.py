@@ -12,7 +12,7 @@ from flask_login import LoginManager, UserMixin, AnonymousUserMixin, login_user,
 app = Flask(__name__)
 
 # secretkey is hardcoded until I figure out config
-app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['SECRET_KEY'] = 'notsosecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
 db = SQLAlchemy(app)
