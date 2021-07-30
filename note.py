@@ -23,7 +23,7 @@ def init ( app ) :
         app.config['SECRET_KEY'] = config.get('config', 'secretkey')
     except:print(" Could not read configs from : ", config_location )
 
-app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+#app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
 db = SQLAlchemy(app)
