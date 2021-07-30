@@ -15,17 +15,16 @@ def init ( app ) :
     try:
         config_location ="etc/ defaults.cfg"
         config.read( config_location )
-        app.config ['DEBUG'] = config.get(" config ", " debug ")
-        app.config ['ip_address'] = config.get(" config ", " ip_address")
-        app.config ['port'] = config.get(" config ", " port ")
-        app.config ['url'] = config.get(" config ", "url")
+        app.config['DEBUG'] = config.get("config", "debug")
+        app.config['ip_address'] = config.get("config", "ip_address")
+        app.config['port'] = config.get("config", "port")
+        app.config['url'] = config.get("config ", "url")
         app.config['SECRET_KEY'] = config.get("config", "secretkey")
-        app.config['SQLALCHEMY_DATABASE_URI'] = config.get("config", "database")
     except:print(" Could not read configs from : ", config_location )
 
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///var/database.db' 
 Bootstrap(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
